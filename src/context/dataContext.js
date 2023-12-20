@@ -4,8 +4,9 @@ const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
     const [data, setData] = useState([]);
+    const [filename, setFileName] = useState(null);
 
-    const value = { data, setData };
+    const value = { data, setData, filename, setFileName };
 
     return (
         <DataContext.Provider value={value}>
