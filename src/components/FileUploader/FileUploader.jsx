@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { useData } from '../../context/dataContext';
+import { useError } from '../../context/errorContext';
+import { checkForValidData, validateFileType } from '../../utils/validation';
 import { transformDate } from '../../utils/transforms';
 
 import styles from './FileUploader.module.css';
-
-const ROW_SEPARATOR = '\n';
-const HEADERS_COLUMN_SEPARATOR = ',';
-const ROW_VALUE_SEPARATOR = ',';
-
+import { HEADERS_COLUMN_SEPARATOR, ROW_SEPARATOR, ROW_VALUE_SEPARATOR } from '../../utils/constants';
 
 const FileUploader = () => {
+    const { error, setError } = useError();
     const { setData, filename, setFileName } = useData();
     const [label, setLabel] = useState(null);
 
@@ -17,10 +16,31 @@ const FileUploader = () => {
         const file = event.target.files[0];
         const reader = new FileReader();
 
+        if (!file) {
+            setError('Please upload a CSV file');
+            return false;
+        }
+
         reader.onload = () => {
+            const validation = validateFileType(file);
+
+            if (!validation.isValid) {
+                setError(validation.error);
+                return;
+            }
+
+            if (error) {
+                setError(null);
+            }
+
             setFileName(file.name);
             const csvData = reader.result;
             processCSV(csvData);
+        };
+
+        reader.onerror = () => {
+            setError('Unable to read file');
+            return false;
         };
 
         reader.readAsText(file);
@@ -39,9 +59,19 @@ const FileUploader = () => {
             }
 
             const values = row.split(ROW_VALUE_SEPARATOR);
+            const validationResult = checkForValidData(values);
+
+            if (validationResult) {
+                setError(`${validationResult} in row ${i}. Please check your file.`);
+                return;
+            }
 
             const parsedDate = transformDate(headers, values);
             parsedData.push(parsedDate);
+        }
+
+        if (parsedData.length === 0) {
+            setError('No data found in CSV');
         }
 
         setData(parsedData);

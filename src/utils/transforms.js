@@ -1,25 +1,5 @@
 import moment from 'moment/moment';
-
-export const AVAILABLE_DATE_FORMATS = [
-    'YYYY-MM-DD',
-    'DD-MM-YYYY',
-    'DD/MM/YYYY',
-    'MM-DD-YYYY',
-    'MM/DD/YYYY',
-    'YYYY/MM/DD',
-    'YYYY/DD/MM',
-    'YYYY-DD-MM',
-    'YYYYMMDD',
-    'DDMMYYYY',
-    'MMDDYYYY',
-    'DD.MM.YYYY',
-    'MM.DD.YYYY',
-    'YYYY.MM.DD',
-    'DD MMM YYYY',
-    'DD/MMM/YYYY',
-    'DD.MMM.YYYY',
-    'DD-MMM-YYYY',
-];
+import { AVAILABLE_DATE_FORMATS } from './constants';
 
 function transformDate(headers,values) {
     const parsedRow = {};
