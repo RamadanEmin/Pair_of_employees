@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useData } from '../../context/dataContext';
-import { findLongestWorkedPair } from '../../utils/helpers';
+import { findLongestWorkedPair, groupWorkedDaysByProject } from '../../utils/helpers';
 import Table from '../Table/Table';
 
 const TableRenderer = () => {
@@ -25,7 +25,7 @@ const TableRenderer = () => {
                 return {
                     title: 'Total working days per project',
                     header: ['Project ID', 'Days worked'],
-                    body: data
+                    body: groupWorkedDaysByProject(data),
                 };
             case 'progress':
                 return {

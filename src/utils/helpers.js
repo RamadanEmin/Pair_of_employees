@@ -38,6 +38,27 @@ const findLongestWorkedPair = (data) => {
     }
 };
 
+const groupWorkedDaysByProject = (data) => {
+    if (data && data.length > 0) {
+        const groupedWorkedDays = data.reduce((acc, { EmpID, ProjectID, DateFrom, DateTo }) => {
+            const startDate = moment(DateFrom).isSame(moment(), 'day') ? moment() : moment(DateFrom);
+            const endDate = moment(DateTo).isSame(moment(), 'day') ? moment() : moment(DateTo);
+            const daysWorked = endDate.diff(startDate, 'days') + 1;
+
+            if (acc[ProjectID]) {
+                acc[ProjectID] += daysWorked;
+            } else {
+                acc[ProjectID] = daysWorked;
+            }
+
+            return acc;
+        }, {});
+
+        return Object.entries(groupedWorkedDays).sort((a, b) => b[1] - a[1]);
+    }
+};
+
 export {
-    findLongestWorkedPair
+    findLongestWorkedPair,
+    groupWorkedDaysByProject
 };
