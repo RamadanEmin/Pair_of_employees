@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useData } from '../../context/dataContext';
+import { findLongestWorkedPair } from '../../utils/helpers';
 import Table from '../Table/Table';
 
 const TableRenderer = () => {
@@ -18,7 +19,7 @@ const TableRenderer = () => {
                 return {
                     title: 'The longest working couple on a project',
                     header: ['Employee ID #1', 'Employee ID #2', 'Project ID', 'Days worked'],
-                    body: data
+                    body: findLongestWorkedPair(data),
                 };
             case 'total':
                 return {
