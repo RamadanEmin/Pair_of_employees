@@ -23,4 +23,33 @@ const AVAILABLE_DATE_FORMATS = [
     'DD-MMM-YYYY',
 ];
 
-export { ROW_SEPARATOR, HEADERS_COLUMN_SEPARATOR, ROW_VALUE_SEPARATOR, AVAILABLE_DATE_FORMATS };
+const FILTERS = [
+    {
+        title: 'Input',
+        value: 'all'
+    },
+    {
+        title: 'Longest working pair',
+        value: 'longest'
+    },
+    {
+        title: 'Working days',
+        value: 'total'
+    },
+    {
+        title: 'Completed Projects',
+        value: 'completed'
+    },
+    {
+        title: 'In progress',
+        value: 'progress'
+    }
+];
+
+export {
+    ROW_SEPARATOR,
+    HEADERS_COLUMN_SEPARATOR,
+    ROW_VALUE_SEPARATOR,
+    AVAILABLE_DATE_FORMATS,
+    FILTERS
+};
