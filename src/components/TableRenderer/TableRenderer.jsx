@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useData } from '../../context/dataContext';
+import Table from '../Table/Table';
 
 const TableRenderer = () => {
     const { filter, data } = useData();

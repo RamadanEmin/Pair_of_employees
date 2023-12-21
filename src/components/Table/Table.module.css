@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-height: 65vh;
+    overflow: auto;
+    padding-bottom: 20px;
+}
+
+.container > h3 {
+    color: #c55c55;
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.header {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.container > table {
+    border: 1px solid #FFFFFF;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.container > table td, table th {
+    padding: 10px 20px;
+    width: 300px;
+    text-align: center;
+    color: #fcb321
+}
+
+.container > table tbody td {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 600;
+}
+
+.container > table tr:nth-child(even) {
+    background: rgba(0, 0, 0, .6);
+}
+
+@media screen and (max-width: 1200px){
+    .container > table td, table th{
+        width: 270px;
+    }
+}
+
+@media screen and (max-width: 992px){
+    .container > table td, table th{
+        width: 190px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .container > table td, table th{
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .container > table td, table th{
+        width: 100px;
+        padding: 5px 0px;
+        font-size: 14px;
+    }
+
+    .container > table tbody td{
+        font-size: 14px;
+    }
+}
