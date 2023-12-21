@@ -58,7 +58,20 @@ const groupWorkedDaysByProject = (data) => {
     }
 };
 
+const groupIncompleteProjects = (data) => {
+    if (data && data.length > 0) {
+        const groupedProjects = _.groupBy(data, 'ProjectID').valueOf();
+        const orderedProjects = _.mapValues(groupedProjects, projects => _.orderBy(projects, 'DateTo', 'desc'));
+        const incompleteProjects = _.map(orderedProjects, _.first);
+        const filteredProjects = incompleteProjects.filter(project => moment(project.DateTo).isSame(moment(), 'day'));
+        const result = filteredProjects.map(({ ProjectID }) => ({ ProjectID }));
+
+        return result;
+    }
+};
+
 export {
     findLongestWorkedPair,
-    groupWorkedDaysByProject
+    groupWorkedDaysByProject,
+    groupIncompleteProjects
 };

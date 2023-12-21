@@ -31,7 +31,7 @@ const TableRenderer = () => {
                 return {
                     title: 'Projects under development',
                     header: ['Project ID'],
-                    body: data
+                    body: groupIncompleteProjects(data),
                 };
             case 'completed':
                 return {
