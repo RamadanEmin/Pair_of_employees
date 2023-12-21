@@ -3,9 +3,9 @@ import { useData } from '../../context/dataContext';
 import { useError } from '../../context/errorContext';
 import { checkForValidData, validateFileType } from '../../utils/validation';
 import { transformDate } from '../../utils/transforms';
+import { HEADERS_COLUMN_SEPARATOR, ROW_SEPARATOR, ROW_VALUE_SEPARATOR } from '../../utils/constants';
 
 import styles from './FileUploader.module.css';
-import { HEADERS_COLUMN_SEPARATOR, ROW_SEPARATOR, ROW_VALUE_SEPARATOR } from '../../utils/constants';
 
 const FileUploader = () => {
     const { error, setError } = useError();
@@ -58,7 +58,7 @@ const FileUploader = () => {
                 continue;
             }
 
-            const values = row.split(ROW_VALUE_SEPARATOR);
+            const values = row.split(ROW_VALUE_SEPARATOR).map(v=>v.trim());
             const validationResult = checkForValidData(values);
 
             if (validationResult) {
