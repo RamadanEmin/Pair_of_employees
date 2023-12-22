@@ -12,7 +12,7 @@ const Table = ({ data }) => {
     return (
         <div className={styles.container}>
             <TableTitle title={data.title} />
-            <table className={styles.header}>
+            <table className={styles.table}>
                 <thead>
                     <tr>
                         {data.header.map((header, headerIndex) => {

@@ -1,10 +1,21 @@
+import _ from 'lodash';
 import { useCallback } from 'react';
 import { useData } from '../../context/dataContext';
 import { findLongestWorkedPair, groupWorkedDaysByProject, completedProjects, groupIncompleteProjects } from '../../utils/helpers';
 import Table from '../Table/Table';
 
+import styles from './TableRenderer.module.css';
+
 const TableRenderer = () => {
-    const { filter, data } = useData();
+    const { filter, data, search, searchType } = useData();
+
+    const filteredData = data.filter(d => {
+        if (search ) {
+            return d[searchType].toString().includes(search);
+        }
+
+        return true;
+    });
 
     const renderer = (filter, data) => {
         switch (filter) {
@@ -18,7 +29,7 @@ const TableRenderer = () => {
             case 'longest':
                 return {
                     title: 'The longest working couple on a project',
-                    header: ['Employee ID #1', 'Employee ID #2', 'Project ID', 'Days worked'],
+                    header: ['EmpID #1', 'EmpID #2', 'Project ID', 'Days worked'],
                     body: findLongestWorkedPair(data),
                 };
             case 'total':
@@ -45,11 +56,14 @@ const TableRenderer = () => {
         }
     };
 
-    const selectedTable = useCallback(renderer(filter, data), [filter, data]);
+    const selectedTable = useCallback(renderer(filter, filteredData), [filter, filteredData]);
 
     return (
-        <div>
-            <Table data={selectedTable} />
+        <div className={styles.container}>
+            {filteredData.length > 0
+                ? <Table data={selectedTable} />
+                : (<div><h2 className={styles.not_found}>No result found</h2></div>)
+            }
         </div>
     );
 };

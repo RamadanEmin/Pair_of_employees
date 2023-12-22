@@ -5,8 +5,21 @@ const DataContext = createContext();
 const DataProvider = ({ children }) => {
     const [data, setData] = useState([]);
     const [filename, setFileName] = useState(null);
-
-    const value = { data, setData, filename, setFileName };
+    const [search, setSearch] = useState('');
+    const [filter, setFilter] = useState('all');
+    const [searchType, setSearchType] = useState('ProjectID');
+    const value = {
+        data,
+        setData,
+        filename,
+        setFileName,
+        search,
+        setSearch,
+        filter,
+        setFilter,
+        searchType,
+        setSearchType
+    };
 
     return (
         <DataContext.Provider value={value}>

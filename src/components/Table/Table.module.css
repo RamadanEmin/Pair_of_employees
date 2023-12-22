@@ -1,3 +1,8 @@
+:root  {
+    --text-color : #555555;
+    --text-domination-color : #fcb321;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -7,16 +12,18 @@
     max-height: 65vh;
     overflow: auto;
     padding-bottom: 20px;
+    background: rgb(240,240,240);
 }
 
 .container > h3 {
-    color: #c55c55;
+    color: #222222;
     text-transform: uppercase;
     font-size: 1rem;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    padding:10px 0
 }
 
-.header {
+.table {
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -24,6 +31,53 @@
     justify-content: space-between;
     width: 100%;
     margin-bottom: 1rem;
+    position: relative;
+}
+
+.table > thead {
+    width:100%;
+    display: flex;
+}
+.table > thead > tr {
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.table > thead > tr > th {
+    width: 100%;
+    text-align: center;
+    color: #222222;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 1px solid #FFFFFF;
+    border-collapse: collapse;
+    background: rgba(220, 220, 220, 1);
+
+}
+
+.table > tbody {
+    width: 100%;
+}
+.table > tbody > tr {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.table > tbody > tr > td {
+    width: 100%;
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 10px 20px;
+    border: 1px solid #FFFFFF;
+    border-collapse: collapse;
 }
 
 .container > table {
@@ -37,17 +91,17 @@
     padding: 10px 20px;
     width: 300px;
     text-align: center;
-    color: #fcb321
+    color: var(--text-color);
 }
 
 .container > table tbody td {
     font-size: 1.2rem;
-    color: #fff;
-    font-weight: 600;
+    color: var(--text-color);
+    font-weight: 400;
 }
 
 .container > table tr:nth-child(even) {
-    background: rgba(0, 0, 0, .6);
+    background: rgba(220, 220, 220, 1);
 }
 
 @media screen and (max-width: 1200px){
@@ -69,13 +123,21 @@
 }
 
 @media screen and (max-width: 600px){
-    .container > table td, table th{
-        width: 100px;
+    .table > thead > tr > th{
         padding: 5px 0px;
         font-size: 14px;
     }
 
     .container > table tbody td{
         font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .container > table td, table th{
+        width: 100px;
+    }
+    .table > tbody > tr > td{
+        padding: 10px 5px;
     }
 }

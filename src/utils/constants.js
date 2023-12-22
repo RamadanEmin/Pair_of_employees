@@ -46,10 +46,30 @@ const FILTERS = [
     }
 ];
 
+const SELECT_DATA = [
+    {
+        title: 'Employee ID',
+        value: 'EmpID'
+    },
+    {
+        title: 'Project ID',
+        value: 'ProjectID'
+    },
+    {
+        title: 'Date From',
+        value: 'DateFrom'
+    },
+    {
+        title: 'Date To',
+        value: 'DateTo'
+    }
+];
+
 export {
     ROW_SEPARATOR,
     HEADERS_COLUMN_SEPARATOR,
     ROW_VALUE_SEPARATOR,
     AVAILABLE_DATE_FORMATS,
-    FILTERS
+    FILTERS,
+    SELECT_DATA
 };

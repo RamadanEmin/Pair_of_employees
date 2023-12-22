@@ -11,9 +11,9 @@ function transformDate(headers,values) {
         if (header === 'DateFrom' || header === 'DateTo') {
             if (value && value !== 'NULL'.trim()) {
                 const format = AVAILABLE_DATE_FORMATS.find(f => moment(value, f, true).valueOf());
-                parsedRow[header] = moment(value, format).format('YYYY/MM/DD');
+                parsedRow[header] = moment(value, format).format('DD MMM YYYY');
             } else if (header === 'DateTo') {
-                parsedRow[header] = moment().format('YYYY/MM/DD');
+                parsedRow[header] = moment().format('DD MMM YYYY');
             }
         } else {
             parsedRow[header] = value;
