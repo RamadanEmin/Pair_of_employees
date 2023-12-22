@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useData } from '../../context/dataContext';
-import { findLongestWorkedPair, groupWorkedDaysByProject } from '../../utils/helpers';
+import { findLongestWorkedPair, groupWorkedDaysByProject, completedProjects, groupIncompleteProjects } from '../../utils/helpers';
 import Table from '../Table/Table';
 
 const TableRenderer = () => {
@@ -37,7 +37,7 @@ const TableRenderer = () => {
                 return {
                     title: 'Completed projects',
                     header: ['Project ID', 'Completed Date'],
-                    body: data
+                    body: _.flatten(completedProjects(data)),
                 };
 
             default:
