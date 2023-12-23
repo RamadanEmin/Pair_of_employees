@@ -91,3 +91,25 @@
     font-weight: 100;
     cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+    .select {
+        font-size: 14px;
+    }
+
+    .btn_search>i {
+        font-size: 1rem;
+    }
+
+    .input_search:not(:placeholder-shown) {
+        width: 50px;
+    }
+
+    .input_search {
+        width: auto;
+    }
+
+    .input_search:focus {
+        width: auto;
+    }
+}

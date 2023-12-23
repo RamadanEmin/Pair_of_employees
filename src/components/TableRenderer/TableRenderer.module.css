@@ -4,7 +4,8 @@
     color: #f44336;
     margin-bottom: 50px;
 }
-.container{
+
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;

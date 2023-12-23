@@ -3,9 +3,10 @@ import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 
 import styles from './Table.module.css';
+import _ from 'lodash';
 
 const Table = ({ data }) => {
-    if (data === null) {
+    if (!data || !data.body) {
         return null;
     }
 

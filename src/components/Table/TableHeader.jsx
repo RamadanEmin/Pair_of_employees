@@ -1,4 +1,4 @@
-const TableHeader = ({header}) => {
+const TableHeader = ({ header }) => {
     return (
         <th>{header}</th>
     );

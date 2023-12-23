@@ -5,7 +5,7 @@ import styles from './Search.module.css';
 
 const Search = () => {
     const { filter, setSearchType, searchType, search, setSearch } = useData();
-    
+
     if (filter !== 'all') {
         return null;
     }

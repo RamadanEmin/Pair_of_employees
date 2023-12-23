@@ -1,7 +1,7 @@
 import moment from 'moment/moment';
 import { AVAILABLE_DATE_FORMATS } from './constants';
 
-function transformDate(headers,values) {
+function transformDate(headers, values) {
     const parsedRow = {};
 
     for (let j = 0; j < headers.length; j++) {

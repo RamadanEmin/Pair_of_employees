@@ -1,4 +1,4 @@
-const TableCell = ({cell}) => {
+const TableCell = ({ cell }) => {
     return (
         <td>{cell}</td>
     );

@@ -10,7 +10,7 @@ const TableRenderer = () => {
     const { filter, data, search, searchType } = useData();
 
     const filteredData = data.filter(d => {
-        if (search ) {
+        if (search) {
             return d[searchType].toString().includes(search);
         }
 
@@ -28,7 +28,7 @@ const TableRenderer = () => {
                 };
             case 'longest':
                 return {
-                    title: 'The longest working couple on a project',
+                    title: 'The longest working pair on a project',
                     header: ['EmpID #1', 'EmpID #2', 'Project ID', 'Days worked'],
                     body: findLongestWorkedPair(data),
                 };

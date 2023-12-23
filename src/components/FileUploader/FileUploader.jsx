@@ -1,41 +1,46 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useData } from '../../context/dataContext';
 import { useError } from '../../context/errorContext';
-import { checkForValidData, validateFileType } from '../../utils/validation';
+import { checkForValidData, checkForValidHeader, validateFileType } from '../../utils/validation';
 import { transformDate } from '../../utils/transforms';
 import { HEADERS_COLUMN_SEPARATOR, ROW_SEPARATOR, ROW_VALUE_SEPARATOR } from '../../utils/constants';
 
 import styles from './FileUploader.module.css';
 
+const reader = new FileReader();
 const FileUploader = () => {
     const { error, setError } = useError();
     const { setData, filename, setFileName } = useData();
-    const [label, setLabel] = useState(null);
+    const [file, setFile] = useState(null);
 
+    useEffect(() => {
+        if (file) {
+            processCSV(file);
+        }
+    }, [file]);
+    
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
-        const reader = new FileReader();
-
+        
+        
         if (!file) {
             setError('Please upload a CSV file');
             return false;
         }
-
+        
         reader.onload = () => {
             const validation = validateFileType(file);
-
+            
             if (!validation.isValid) {
                 setError(validation.error);
                 return;
             }
-
+            
             if (error) {
                 setError(null);
             }
-
             setFileName(file.name);
-            const csvData = reader.result;
-            processCSV(csvData);
+            setFile(reader.result);
         };
 
         reader.onerror = () => {
@@ -44,11 +49,23 @@ const FileUploader = () => {
         };
 
         reader.readAsText(file);
+
+        event.target.value = null;
     };
 
     const processCSV = (csvData) => {
+
+        let validation;
+
         const rows = csvData.split(ROW_SEPARATOR);
         const headers = rows[0].split(HEADERS_COLUMN_SEPARATOR);
+
+        validation = checkForValidHeader(headers);
+        if (validation) {
+            setError(validation);
+            return;
+        }
+
         const parsedData = [];
 
         for (let i = 1; i < rows.length; i++) {
@@ -58,11 +75,11 @@ const FileUploader = () => {
                 continue;
             }
 
-            const values = row.split(ROW_VALUE_SEPARATOR).map(v=>v.trim());
-            const validationResult = checkForValidData(values);
+            const values = row.split(ROW_VALUE_SEPARATOR).map(v => v.trim());
+            validation = checkForValidData(values);
 
-            if (validationResult) {
-                setError(`${validationResult} in row ${i}. Please check your file.`);
+            if (validation) {
+                setError(`${validation} in row ${i}. Please check your file.`);
                 return;
             }
 
@@ -78,12 +95,11 @@ const FileUploader = () => {
     };
 
     return (
-        <div className={styles.uploader} onMouseLeave={() => filename && setLabel(filename)}
-            onMouseOver={() => setLabel('Upload CSV')}>
+        <div className={styles.uploader} >
             <input type='file'
                 className={styles.file_input}
                 onChange={handleFileUpload} />
-            <label className={styles.file_label}>{label || 'Upload CSV'}</label>
+            <label className={styles.file_label}>{filename || 'Upload file'}</label>
         </div>
     );
 };

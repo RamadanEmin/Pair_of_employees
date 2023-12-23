@@ -7,7 +7,11 @@
     width: 100%;
     overflow: hidden;
     padding: 5px;
-    background: rgb(46,42,61)
+    background: rgb(46, 42, 61)
+}
+
+.container>button {
+    font-size: 1rem;
 }
 
 .filter {
@@ -20,20 +24,25 @@
     background: transparent;
 }
 
-@media screen and (max-width: 992px){
-    .filter{
+@media screen and (max-width: 992px) {
+    .filter {
         padding: 10px 15px;
     }
 }
 
-@media screen and (max-width: 768px){
-    .container{
+@media screen and (max-width: 768px) {
+    .container {
         justify-content: center;
     }
 }
 
-@media screen and (max-width: 600px){
-    .container{
-        flex-direction: column;
+@media screen and (max-width: 600px) {
+    .container {
+        justify-content: flex-start;
+    }
+
+    .container>button {
+        width: 50%;
+        font-size: 1rem;
     }
 }

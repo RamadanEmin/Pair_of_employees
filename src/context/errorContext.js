@@ -1,12 +1,12 @@
-import {createContext, useContext, useState} from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const ErrorContext = createContext();
 
-const ErrorProvider = ({children}) => {
+const ErrorProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     return (
-        <ErrorContext.Provider value={{error, setError}}>
+        <ErrorContext.Provider value={{ error, setError }}>
             {children}
         </ErrorContext.Provider>
     );
@@ -20,4 +20,4 @@ const useError = () => {
     return context;
 };
 
-export {ErrorProvider, useError};
+export { ErrorProvider, useError };

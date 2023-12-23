@@ -3,7 +3,7 @@ import moment from 'moment/moment';
 
 const findLongestWorkedPair = (data) => {
     if (data && data.length > 0) {
-        let longestWorkedPair = ['', '', '', 0];
+        let longestWorkedPair = ['', '', '', null];
 
         for (let i = 0; i < data.length - 1; i++) {
             const { EmpID, ProjectID, DateFrom, DateTo } = data[i];
