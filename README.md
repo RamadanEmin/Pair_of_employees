@@ -88,11 +88,11 @@ In the filters for in-progress projects, the app checks whether a given employee
 
 Ramadan Emin
 
-<img src="/images/input.png"  width= 800px height= 500px>
-<img src="/images/longest.png"  width= 800px height= 500px>
-<img src="/images/days.png"  width= 800px height= 500px>
-<img src="/images/completed.png"  width= 800px height= 500px>
-<img src="/images/inprogress.png"  width= 800px height= 500px>
-<img src="/images/upload.png"  width= 290px height= 590px>
-<img src="/images/mob.png"  width= 290px height= 590px>
-<img src="/images/moblong.png"  width= 290px height= 590px>
+<img src="public/images/input.png"  width= 800px height= 500px>
+<img src="public/images/longest.png"  width= 800px height= 500px>
+<img src="public/images/days.png"  width= 800px height= 500px>
+<img src="public/images/completed.png"  width= 800px height= 500px>
+<img src="public/images/inprogress.png"  width= 800px height= 500px>
+<img src="public/images/upload.png"  width= 290px height= 590px>
+<img src="public/images/mob.png"  width= 290px height= 590px>
+<img src="public/images/moblong.png"  width= 290px height= 590px>
