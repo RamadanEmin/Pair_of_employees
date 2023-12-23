@@ -3,7 +3,7 @@ import moment from 'moment/moment';
 
 const findLongestWorkedPair = (data) => {
     if (data && data.length > 0) {
-        let longestWorkedPair = ['', '', '', null];
+        let pairsWorkedTogether = {};
 
         for (let i = 0; i < data.length - 1; i++) {
             const { EmpID, ProjectID, DateFrom, DateTo } = data[i];
@@ -12,30 +12,55 @@ const findLongestWorkedPair = (data) => {
                 const { EmpID: otherEmpID, ProjectID: otherProjectID, DateFrom: otherDateFrom, DateTo: otherDateTo } = data[j];
 
                 if (EmpID !== otherEmpID && ProjectID === otherProjectID) {
-                    const startDate = moment(DateFrom).isSame(moment(), 'day') ? moment() : moment(DateFrom);
-                    const endDate = moment(DateTo).isSame(moment(), 'day') ? moment() : moment(DateTo);
-                    const otherStartDate = moment(otherDateFrom).isSame(moment(), 'day') ? moment() : moment(otherDateFrom);
-                    const otherEndDate = moment(otherDateTo).isSame(moment(), 'day') ? moment() : moment(otherDateTo);
+                    const startDate = moment(DateFrom);
+                    const endDate = moment(DateTo);
+                    const otherStartDate = moment(otherDateFrom);
+                    const otherEndDate = moment(otherDateTo);
 
                     if (startDate.isSameOrBefore(otherEndDate) && endDate.isSameOrAfter(otherStartDate)) {
-                        const overlappingStartDate = startDate.isAfter(otherStartDate) ? startDate : otherStartDate;
-                        const overlappingEndDate = endDate.isBefore(otherEndDate) ? endDate : otherEndDate;
+                        const overlappingStartDate = moment.max(startDate, otherStartDate);
+                        const overlappingEndDate = moment.min(endDate, otherEndDate);
                         const daysWorked = overlappingEndDate.diff(overlappingStartDate, 'days') + 1;
 
-                        if (daysWorked > longestWorkedPair[3]) {
-                            longestWorkedPair = [EmpID, otherEmpID, ProjectID, daysWorked];
+                        const pairKey = `${EmpID}-${otherEmpID}`;
+                        if (!pairsWorkedTogether[pairKey]) {
+                            pairsWorkedTogether[pairKey] = {
+                                EmpID1: EmpID,
+                                EmpID2: otherEmpID,
+                                Projects: {}
+                            };
                         }
+
+                        if (!pairsWorkedTogether[pairKey].Projects[ProjectID]) {
+                            pairsWorkedTogether[pairKey].Projects[ProjectID] = 0;
+                        }
+
+                        pairsWorkedTogether[pairKey].Projects[ProjectID] += daysWorked;
                     }
                 }
             }
         }
-        return [{
-            EmpID1: longestWorkedPair[0],
-            EmpID2: longestWorkedPair[1],
-            ProjectID: longestWorkedPair[2],
-            DaysWorked: longestWorkedPair[3],
-        }];
+
+        const mostCollaborativePair = Object.values(pairsWorkedTogether).reduce((maxPair, currentPair) => {
+            const currentPairTotalDays = Object.values(currentPair.Projects).reduce((total, days) => total + days, 0);
+            const maxPairTotalDays = Object.values(maxPair.Projects).reduce((total, days) => total + days, 0);
+
+            return currentPairTotalDays > maxPairTotalDays ? currentPair : maxPair;
+        }, { Projects: {} });
+
+        if (Object.keys(mostCollaborativePair.Projects).length > 0) {
+            const result = Object.entries(mostCollaborativePair.Projects).map(([projectID, days]) => ({
+                EmpID1: mostCollaborativePair.EmpID1,
+                EmpID2: mostCollaborativePair.EmpID2,
+                ProjectID: projectID,
+                Days: days
+            }));
+
+            return result;
+        }
     }
+
+    return [];
 };
 
 const groupWorkedDaysByProject = (data) => {

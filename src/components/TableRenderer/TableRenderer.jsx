@@ -28,9 +28,10 @@ const TableRenderer = () => {
                 };
             case 'longest':
                 return {
-                    title: 'The longest working pair on a project',
-                    header: ['EmpID #1', 'EmpID #2', 'Project ID', 'Days worked'],
+                    title: 'The longest collaboration on projects',
+                    header: ['EmpID #1', 'EmpID #2', 'Project ID', 'Days'],
                     body: findLongestWorkedPair(data),
+                    total: findLongestWorkedPair(data).reduce((totalDays, project) => totalDays + project.Days, 0)
                 };
             case 'total':
                 return {

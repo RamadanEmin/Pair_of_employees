@@ -109,6 +109,17 @@ table th {
     background: rgba(220, 220, 220, 1);
 }
 
+.total{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.total span{
+    color: red;
+}
+
 @media screen and (max-width: 1200px) {
 
     .container>table td,

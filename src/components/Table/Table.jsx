@@ -3,7 +3,6 @@ import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 
 import styles from './Table.module.css';
-import _ from 'lodash';
 
 const Table = ({ data }) => {
     if (!data || !data.body) {
@@ -28,10 +27,10 @@ const Table = ({ data }) => {
                                 <TableRow row={row} />
                             </tr>
                         );
-                    })
-                    }
+                    })}
                 </tbody>
             </table>
+            {data.total && <p className={styles.total}>Total <span>{data.total}</span> days worked</p>}
         </div>
     );
 };
